@@ -4,6 +4,7 @@ import matplotlib as plt
 import math
 
 numNeurons = 10
+numUpdates = 10
 
 def MatrixCreate(rows, cols):
     matrix = numpy.zeros(shape=(rows, cols))
@@ -16,4 +17,7 @@ def MatrixRandomize(v):
 parent = MatrixCreate(numNeurons, numNeurons)
 parent = MatrixRandomize(parent)
 
-print (parent)
+neuronValues = MatrixCreate(numUpdates, numNeurons)
+neuronValues[0] = 0.5
+
+print (neuronValues)
