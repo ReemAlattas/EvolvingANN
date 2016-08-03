@@ -35,6 +35,9 @@ def FitnessParent(parent):
     for i in range(1, numUpdates):
         Update (neuronValues, parent, i)
     print neuronValues
+    ### PLOT ###
+    plt.pyplot.imshow(neuronValues, cmap=plt.cm.gray, aspect='auto', interpolation='nearest')
+    plt.pyplot.show()
     #return fitness
     
 def HillClimber(generation):
