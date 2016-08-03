@@ -9,6 +9,10 @@ numUpdates = 10
 def VectorCreate(width):
     v = np.zeros((width), dtype='f')
     return v
+
+def MeanDistance(v1,v2):
+    
+    return d
     
 def MatrixCreate(rows, cols):
     matrix = np.zeros(shape=(rows, cols))
@@ -46,6 +50,8 @@ def FitnessParent(parent):
     for j in range(1,10,2):
         desiredNeuronValues[j]=1
     print desiredNeuronValues
+    
+    MeanDistance(actualNeuronValues, desiredNeuronValues)
     
     ### PLOT ###
     plt.pyplot.imshow(neuronValues, cmap=plt.cm.gray, aspect='auto', interpolation='nearest')
