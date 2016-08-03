@@ -1,7 +1,7 @@
 import numpy as np
 import random
 import matplotlib as plt
-import math
+#import math
 
 numNeurons = 10
 numUpdates = 10
@@ -11,7 +11,7 @@ def VectorCreate(width):
     return v
 
 def MeanDistance(v1,v2):
-    
+    d = ((v1 - v2) ** 2).mean(axis=None)
     return d
     
 def MatrixCreate(rows, cols):
@@ -49,9 +49,10 @@ def FitnessParent(parent):
     desiredNeuronValues = VectorCreate(10)
     for j in range(1,10,2):
         desiredNeuronValues[j]=1
-    print desiredNeuronValues
+    #print desiredNeuronValues
     
-    MeanDistance(actualNeuronValues, desiredNeuronValues)
+    print MeanDistance(actualNeuronValues, desiredNeuronValues)
+    
     
     ### PLOT ###
     plt.pyplot.imshow(neuronValues, cmap=plt.cm.gray, aspect='auto', interpolation='nearest')
