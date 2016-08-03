@@ -11,9 +11,14 @@ def MatrixRandomize(v):
     random_m = [[random.uniform(-1, 1) for y in range(len(v[x]))] for x in range(len(v))]
     return random_m
     
+def Fitness(v):
+    mean_val = numpy.mean(v)
+    return mean_val
+    
 parent = MatrixCreate(1,50) 
-parent = MatrixRandomize(parent) 
-#     parentFitness = FitnessParent(parent) 
+parent = MatrixRandomize(parent)
+print parent 
+parentFitness = FitnessParent(parent) 
 #     for currentGeneration in range(0,5000):
 #          print currentGeneration, parentFitness 
 #          child = MatrixPerturb(parent,0.05) 
