@@ -6,6 +6,10 @@ import math
 numNeurons = 10
 numUpdates = 10
 
+def VectorCreate(width):
+    v = np.zeros((width), dtype='f')
+    return v
+    
 def MatrixCreate(rows, cols):
     matrix = np.zeros(shape=(rows, cols))
     return matrix
@@ -38,7 +42,7 @@ def FitnessParent(parent):
     
     actualNeuronValues = neuronValues[9,:]
     
-    desiredNeuronValues = np.zeros(10)
+    desiredNeuronValues = VectorCreate(10)
     for j in range(1,10,2):
         desiredNeuronValues[j]=1
     print desiredNeuronValues
