@@ -3,6 +3,9 @@ import random
 import matplotlib as plt
 import copy
 
+numNeurons = 10
+numUpdates = 10
+
 def MatrixCreate(rows, cols):
     matrix = np.zeros(shape=(rows, cols))
     return matrix
@@ -12,7 +15,8 @@ def MatrixRandomize(v):
     return random_m
     
 def Fitness(v):
-    mean_val = numpy.mean(v)
+    neuronValues = MatrixCreate(numUpdates, numNeurons)
+    
     return mean_val
     
 parent = MatrixCreate(1,50) 
