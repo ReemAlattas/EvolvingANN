@@ -31,14 +31,23 @@ def Update (neuronValues, synapses, i):
 def FitnessParent(parent):
     neuronValues = MatrixCreate(numUpdates, numNeurons)
     neuronValues[0] = 0.5
-    print neuronValues
+    #print neuronValues
     for i in range(1, numUpdates):
         Update (neuronValues, parent, i)
     print neuronValues
+    
+    actualNeuronValues = neuronValues[9,:]
+    
+    desiredNeuronValues = np.zeros(10)
+    for j in range(1,10,2):
+        desiredNeuronValues[j]=1
+    print desiredNeuronValues
+    
     ### PLOT ###
     plt.pyplot.imshow(neuronValues, cmap=plt.cm.gray, aspect='auto', interpolation='nearest')
     plt.pyplot.show()
     #return fitness
+    
     
 def HillClimber(generation):
     parent = MatrixCreate(numNeurons,numNeurons) 
