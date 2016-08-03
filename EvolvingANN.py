@@ -28,11 +28,20 @@ def Update (neuronValues, synapses, i):
         neuronValues[i][j] = sum        
     return neuronValues
     
+def FitnessParent(parent):
+    neuronValues = MatrixCreate(numUpdates, numNeurons)
+    neuronValues[0] = 0.5
+    print neuronValues
+    for i in range(1, numNeurons):
+        Update (neuronValues, parent, i)
+    print neuronValues
+    #return fitness
+    
 def HillClimber(generation):
-    parent = MatrixCreate(1,50) 
+    parent = MatrixCreate(numNeurons,numNeurons) 
     parent = MatrixRandomize(parent) 
     print parent
-    #     parentFitness = FitnessParent(parent) 
+    parentFitness = FitnessParent(parent) 
     #     for currentGeneration in range(0,5000):
     #          print currentGeneration, parentFitness 
     #          child = MatrixPerturb(parent,0.05)   
@@ -41,17 +50,13 @@ def HillClimber(generation):
     #               parent = child 
     #               parentFitness = childFitness
 
-parent = MatrixCreate(numNeurons, numNeurons)
-parent = MatrixRandomize(parent)
-
-neuronValues = MatrixCreate(numUpdates, numNeurons)
-neuronValues[0] = 0.5
-
-desiredNeuronValues = np.zeros(10)
-
-for i in range(1, numUpdates):
-    neuronValues = Update (neuronValues, parent, i)
-
-print (neuronValues)
 
 HillClimber(1000)
+
+#desiredNeuronValues = np.zeros(10)
+#
+#for i in range(1, numUpdates):
+#    neuronValues = Update (neuronValues, parent, i)
+#
+#print (neuronValues)
+
