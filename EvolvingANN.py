@@ -17,8 +17,8 @@ def MatrixRandomize(v):
 def Update (neuronValues, synapses, i):
     temp = 0
     sum = 0 
-    for j in range(numNeurons):
-        for k in range(numNeurons):
+    for j in range(numUpdates):
+        for k in range(numUpdates):
             temp = neuronValues[i-1][k] * synapses[j][k]
             sum = sum + temp
         if (sum < 0):
@@ -32,7 +32,7 @@ def FitnessParent(parent):
     neuronValues = MatrixCreate(numUpdates, numNeurons)
     neuronValues[0] = 0.5
     print neuronValues
-    for i in range(1, numNeurons):
+    for i in range(1, numUpdates):
         Update (neuronValues, parent, i)
     print neuronValues
     #return fitness
