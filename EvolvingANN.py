@@ -11,7 +11,7 @@ def MatrixCreate(rows, cols):
     return matrix
     
 def MatrixRandomize(v):
-    random_m = [[random.random() for y in range(len(v[x]))] for x in range(len(v))]
+    random_m = [[random.uniform(-1, 1) for y in range(len(v[x]))] for x in range(len(v))]
     return random_m
     
 def Update (neuronValues, synapses, i):
@@ -27,6 +27,19 @@ def Update (neuronValues, synapses, i):
             sum = 1
         neuronValues[i][j] = sum        
     return neuronValues
+    
+def HillClimber(generation):
+    parent = MatrixCreate(1,50) 
+    parent = MatrixRandomize(parent) 
+    print parent
+    #     parentFitness = FitnessParent(parent) 
+    #     for currentGeneration in range(0,5000):
+    #          print currentGeneration, parentFitness 
+    #          child = MatrixPerturb(parent,0.05)   
+    #          childFitness = Fitness(child) 
+    #          if ( childFitness > parentFitness ):
+    #               parent = child 
+    #               parentFitness = childFitness
 
 parent = MatrixCreate(numNeurons, numNeurons)
 parent = MatrixRandomize(parent)
@@ -39,4 +52,6 @@ desiredNeuronValues = np.zeros(10)
 for i in range(1, numUpdates):
     neuronValues = Update (neuronValues, parent, i)
 
-print (desiredNeuronValues)
+print (neuronValues)
+
+HillClimber(1000)
