@@ -51,13 +51,13 @@ def Update (neuronValues, synapses, i):
         neuronValues[i][j] = sum        
     return neuronValues
     
-def FitnessParent(parent):
-    neuronValues = MatrixCreate(numUpdates, numNeurons)
-    neuronValues[0] = 0.5
+def FitnessParent(neuronValues, parent):
+    #neuronValues = MatrixCreate(numUpdates, numNeurons)
+    #neuronValues[0] = 0.5
     #print neuronValues
-    for i in range(1, numUpdates):
-        Update (neuronValues, parent, i)
-    print neuronValues
+    #for i in range(1, numUpdates):
+    #    Update (neuronValues, parent, i)
+    #print neuronValues
     
     actualNeuronValues = neuronValues[9,:]
     
@@ -68,10 +68,10 @@ def FitnessParent(parent):
     
     d = MeanDistance(actualNeuronValues, desiredNeuronValues)
     fit = 1 - d
-    
+    print fit
     ### PLOT ###
-    plt.pyplot.imshow(neuronValues, cmap=plt.cm.gray, aspect='auto', interpolation='nearest')
-    plt.pyplot.show()
+    #plt.pyplot.imshow(neuronValues, cmap=plt.cm.gray, aspect='auto', interpolation='nearest')
+    #plt.pyplot.show()
     
     return fit
     
@@ -79,12 +79,30 @@ def FitnessParent(parent):
 def HillClimber(generation):
     parent = MatrixCreate(numNeurons,numNeurons) 
     parent = MatrixRandomize(parent) 
-    print parent
-    parentFitness = FitnessParent(parent) 
+    #print parent
+    
+    neuronValues = MatrixCreate(numUpdates, numNeurons)
+    neuronValues[0] = 0.5
+    
+    parentFitness = FitnessParent(neuronValues, parent) 
+    
+    neuronValues = MatrixCreate(numUpdates, numNeurons)
+    neuronValues[0] = 0.5
+    
+    for i in range(1, numUpdates):
+        Update (neuronValues, parent, i)
+    #print neuronValues
+    
+    #plt.pyplot.xlabel('Neuron')
+    #plt.pyplot.ylabel('Time Step')
+    plt.pyplot.imshow(neuronValues, cmap=plt.cm.gray, aspect='auto', interpolation='nearest')
+    plt.pyplot.show()
+    
     for currentGeneration in range(0,5000):
-         print currentGeneration, parentFitness 
+         print currentGeneration, parentFitness
          child = MatrixPerturb(parent,0.05)   
-         childFitness = Fitness(child) 
+         childFitness = Fitness(child)
+         print childFitness 
          if ( childFitness > parentFitness ):
               parent = child 
               parentFitness = childFitness
