@@ -6,6 +6,10 @@ import copy
 numNeurons = 10
 numUpdates = 10
 
+def VectorCreate(width):
+    v = np.zeros((width), dtype='f')
+    return v
+
 def MatrixCreate(rows, cols):
     matrix = np.zeros(shape=(rows, cols))
     return matrix
@@ -33,7 +37,17 @@ def FitnessParent(parent):
     neuronValues[0] = 0.5
     for i in range(1, numUpdates):
         Update (neuronValues, parent, i)
-    print "Neuron Values", neuronValues
+    #print "Neuron Values", neuronValues
+    
+    ### PLOT ###
+    plt.pyplot.imshow(neuronValues, cmap=plt.cm.gray, aspect='auto', interpolation='nearest')
+    plt.pyplot.show()
+    
+    actualNeuronValues = neuronValues[9,:]
+    desiredNeuronValues = VectorCreate(10)
+    for j in range(1,10,2):
+        desiredNeuronValues[j]=1
+        
     return neuronValues
 
 #The synaptic weights of the parent neural network
