@@ -52,12 +52,12 @@ def Update (neuronValues, synapses, i):
     return neuronValues
     
 def FitnessParent(neuronValues, parent):
-    #neuronValues = MatrixCreate(numUpdates, numNeurons)
-    #neuronValues[0] = 0.5
-    #print neuronValues
-    #for i in range(1, numUpdates):
-    #    Update (neuronValues, parent, i)
-    #print neuronValues
+    neuronValues = MatrixCreate(numUpdates, numNeurons)
+    neuronValues[0] = 0.5
+    print neuronValues
+    for i in range(1, numUpdates):
+        Update (neuronValues, parent, i)
+    print neuronValues
     
     actualNeuronValues = neuronValues[9,:]
     

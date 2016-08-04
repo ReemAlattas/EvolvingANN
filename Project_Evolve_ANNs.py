@@ -14,14 +14,32 @@ def MatrixRandomize(v):
     random_m = [[random.uniform(-1, 1) for y in range(len(v[x]))] for x in range(len(v))]
     return random_m
     
-def Fitness(v):
+def Update (neuronValues, synapses, i):
+    temp = 0
+    sum = 0 
+    for j in range(numNeurons):
+        for k in range(numNeurons):
+            temp = neuronValues[i-1][k] * synapses[j][k]
+            sum = sum + temp
+        if (sum < 0):
+            sum = 0
+        if (sum > 1):
+            sum = 1
+        neuronValues[i][j] = sum        
+    return neuronValues
+    
+def FitnessParent(parent):
     neuronValues = MatrixCreate(numUpdates, numNeurons)
-    
-    return mean_val
-    
-parent = MatrixCreate(1,50) 
+    neuronValues[0] = 0.5
+    for i in range(1, numUpdates):
+        Update (neuronValues, parent, i)
+    print "Neuron Values", neuronValues
+    return neuronValues
+
+#The synaptic weights of the parent neural network
+parent = MatrixCreate(numNeurons,numNeurons) 
 parent = MatrixRandomize(parent)
-print parent 
+print "Parent", parent 
 parentFitness = FitnessParent(parent) 
 #     for currentGeneration in range(0,5000):
 #          print currentGeneration, parentFitness 
