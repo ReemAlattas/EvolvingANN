@@ -22,6 +22,16 @@ def MatrixRandomize(v):
     random_m = [[random.uniform(-1, 1) for y in range(len(v[x]))] for x in range(len(v))]
     return random_m
     
+def MatrixPerturb(p, prob):
+    c = copy.deepcopy(p)
+    #print(p)
+    #print(c)
+    for x in range(len(c)):
+        for y in range(len(c[x])):
+            if prob > random.random():
+                c[x][y] = random.random()
+    return c
+    
 def Update (neuronValues, synapses, i):
     temp = 0
     sum = 0 
@@ -57,19 +67,24 @@ def FitnessParent(parent):
     #Compute Mean Distance
     d = MeanDistance(actualNeuronValues, desiredNeuronValues)
     f = 1 - d
-    print "Fitness = ", f
+    #print "Fitness = ", f
     return f
 
 #The synaptic weights of the parent neural network
 parent = MatrixCreate(numNeurons,numNeurons) 
 parent = MatrixRandomize(parent)
-print "Parent", parent 
+#print "Parent", parent 
 parentFitness = FitnessParent(parent) 
-#     for currentGeneration in range(0,5000):
-#          print currentGeneration, parentFitness 
-#          child = MatrixPerturb(parent,0.05) 
-#          childFitness = Fitness(child) 
-#          if ( childFitness > parentFitness ):
-#               parent = child 
-#               parentFitness = childFitness
+
+for currentGeneration in range(0,5000):
+    #print currentGeneration, parentFitness 
+    child = MatrixPerturb(parent,0.05) 
+    childFitness = FitnessParent(child) 
+    if ( childFitness > parentFitness ):
+        parent = child 
+        parentFitness = childFitness
+
+print "Parent", parent
+print "Child", child
+print "Parent Fitness = ", parentFitness
 
