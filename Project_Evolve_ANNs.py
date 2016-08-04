@@ -10,6 +10,10 @@ def VectorCreate(width):
     v = np.zeros((width), dtype='f')
     return v
 
+def MeanDistance(v1,v2):
+    d = ((v1 - v2) ** 2).mean(axis=None)
+    return d
+
 def MatrixCreate(rows, cols):
     matrix = np.zeros(shape=(rows, cols))
     return matrix
