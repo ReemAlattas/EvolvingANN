@@ -94,9 +94,14 @@ def Fitness2(parent):
     #print "Actual", actualNeuronValues
     #print "Desired", desiredNeuronValues 
     
-    #Compute Mean Distance
-    d = MeanDistance(actualNeuronValues, desiredNeuronValues)
-    f = 1 - d
+    #Compute Avg Difference
+    diff = 0.0
+    for i in range(1,9): 
+        for j in range(0,9):
+            diff=diff + abs(neuronValues[i, j] - neuronValues[i, j+1])
+            diff=diff + abs(neuronValues[i+1, j] - neuronValues[i, j]) 
+    diff=diff/(2*8*9)
+    f = 1 - diff
     #print "Fitness = ", f
     return f
 
