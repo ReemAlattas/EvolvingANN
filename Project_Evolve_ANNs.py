@@ -10,6 +10,10 @@ numGenerations = 5000
 def VectorCreate(width):
     v = np.zeros((width), dtype='f')
     return v
+    
+def VectorPlot(v):
+    plt.pyplot.plot(v)
+    plt.pyplot.show()
 
 def MeanDistance(v1,v2):
     d = ((v1 - v2) ** 2).mean(axis=None)
@@ -104,7 +108,9 @@ for i in range(1, numUpdates):
         Update (neuronValues, parent, i)
         
 ### PLOT ###
-MatrixPlot(neuronValues)
+#MatrixPlot(neuronValues)
+
+VectorPlot(fitnessVector)
 
 #print "Parent = ", parent
 #print "Child = ", child
