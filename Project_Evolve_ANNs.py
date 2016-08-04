@@ -50,16 +50,17 @@ def Update (neuronValues, synapses, i):
             sum = 1
         neuronValues[i][j] = sum        
     return neuronValues
-    
+
+neuronValues = MatrixCreate(numUpdates, numNeurons)  
+neuronValues[0] = 0.5
+
 def FitnessParent(parent):
-    neuronValues = MatrixCreate(numUpdates, numNeurons)
-    neuronValues[0] = 0.5
     for i in range(1, numUpdates):
         Update (neuronValues, parent, i)
     #print "Neuron Values", neuronValues
     
     ### PLOT ###
-    MatrixPlot(neuronValues)
+    #MatrixPlot(neuronValues)
     
     actualNeuronValues = neuronValues[9,:]
     desiredNeuronValues = VectorCreate(10)
@@ -98,8 +99,14 @@ for currentGeneration in range(0,numGenerations):
     if ( childFitness > parentFitness ):
         parent = child 
         parentFitness = childFitness
+        
+for i in range(1, numUpdates):
+        Update (neuronValues, parent, i)
+        
+### PLOT ###
+MatrixPlot(neuronValues)
 
-print "Parent = ", parent
-print "Child = ", child
-print "Fitness Vector = ", fitnessVector
+#print "Parent = ", parent
+#print "Child = ", child
+#print "Fitness Vector = ", fitnessVector
 
