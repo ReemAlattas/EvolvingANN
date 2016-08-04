@@ -5,6 +5,7 @@ import copy
 
 numNeurons = 10
 numUpdates = 10
+numGenerations = 5000
 
 def VectorCreate(width):
     v = np.zeros((width), dtype='f')
@@ -76,15 +77,18 @@ parent = MatrixRandomize(parent)
 #print "Parent", parent 
 parentFitness = FitnessParent(parent) 
 
-for currentGeneration in range(0,5000):
+fitnessVector = VectorCreate(numGenerations)
+
+for currentGeneration in range(0,numGenerations):
     #print currentGeneration, parentFitness 
+    fitnessVector[currentGeneration] = parentFitness
     child = MatrixPerturb(parent,0.05) 
     childFitness = FitnessParent(child) 
     if ( childFitness > parentFitness ):
         parent = child 
         parentFitness = childFitness
 
-print "Parent", parent
-print "Child", child
-print "Parent Fitness = ", parentFitness
+print "Parent = ", parent
+print "Child = ", child
+print "Fitness Vector = ", fitnessVector
 
