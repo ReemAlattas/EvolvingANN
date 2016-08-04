@@ -50,8 +50,9 @@ def FitnessParent(parent):
     actualNeuronValues = neuronValues[9,:]
     desiredNeuronValues = VectorCreate(10)
     for j in range(1,10,2):
-        desiredNeuronValues[j]=1
-        
+        desiredNeuronValues[j] = 1
+    print "Actual", actualNeuronValues
+    print "Desired", desiredNeuronValues  
     return neuronValues
 
 #The synaptic weights of the parent neural network
