@@ -119,27 +119,28 @@ fitnessVector = VectorCreate(numGenerations)
 #for i in range(1, numUpdates):
 #        Update (neuronValues, parent, i)
 #        
-#plt.pyplot.imshow(neuronValues, cmap=plt.cm.gray, aspect='auto', interpolation='nearest')
-#plt.pyplot.show()
+
+#MatrixPlot(neuronValues)
 
 for currentGeneration in range(0,numGenerations):
     #print currentGeneration, parentFitness 
     fitnessVector[currentGeneration] = parentFitness
     child = MatrixPerturb(parent,0.05) 
     #childFitness = FitnessParent(child) 
-    parentFitness = Fitness2(parent)
+    childFitness = Fitness2(parent)
     if ( childFitness > parentFitness ):
         parent = child 
         parentFitness = childFitness
         
 for i in range(1, numUpdates):
         Update (neuronValues, parent, i)
-        
+
+#print "Neuron Values", neuronValues        
 ### PLOT ###
 #MatrixPlot(neuronValues)
-#VectorPlot(fitnessVector)
+VectorPlot(fitnessVector)
 
 #print "Parent = ", parent
 #print "Child = ", child
-#print "Fitness Vector = ", fitnessVector
+print "Fitness Vector = ", fitnessVector
 
