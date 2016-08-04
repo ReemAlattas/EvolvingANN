@@ -5,7 +5,7 @@ import copy
 
 numNeurons = 10
 numUpdates = 10
-numGenerations = 5000
+numGenerations = 1000
 
 def VectorCreate(width):
     v = np.zeros((width), dtype='f')
@@ -78,12 +78,34 @@ def FitnessParent(parent):
     f = 1 - d
     #print "Fitness = ", f
     return f
+    
+def Fitness2(parent):
+    for i in range(1, numUpdates):
+        Update (neuronValues, parent, i)
+    #print "Neuron Values", neuronValues
+    
+    ### PLOT ###
+    #MatrixPlot(neuronValues)
+    
+    actualNeuronValues = neuronValues[9,:]
+    desiredNeuronValues = VectorCreate(10)
+    for j in range(1,10,2):
+        desiredNeuronValues[j] = 1
+    #print "Actual", actualNeuronValues
+    #print "Desired", desiredNeuronValues 
+    
+    #Compute Mean Distance
+    d = MeanDistance(actualNeuronValues, desiredNeuronValues)
+    f = 1 - d
+    #print "Fitness = ", f
+    return f
 
 #The synaptic weights of the parent neural network
 parent = MatrixCreate(numNeurons,numNeurons) 
 parent = MatrixRandomize(parent)
 #print "Parent", parent 
-parentFitness = FitnessParent(parent) 
+#parentFitness = FitnessParent(parent) 
+parentFitness = Fitness2(parent)
 
 fitnessVector = VectorCreate(numGenerations)
 
@@ -99,7 +121,8 @@ for currentGeneration in range(0,numGenerations):
     #print currentGeneration, parentFitness 
     fitnessVector[currentGeneration] = parentFitness
     child = MatrixPerturb(parent,0.05) 
-    childFitness = FitnessParent(child) 
+    #childFitness = FitnessParent(child) 
+    parentFitness = Fitness2(parent)
     if ( childFitness > parentFitness ):
         parent = child 
         parentFitness = childFitness
@@ -109,8 +132,7 @@ for i in range(1, numUpdates):
         
 ### PLOT ###
 #MatrixPlot(neuronValues)
-
-VectorPlot(fitnessVector)
+#VectorPlot(fitnessVector)
 
 #print "Parent = ", parent
 #print "Child = ", child
