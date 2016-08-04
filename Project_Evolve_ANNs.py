@@ -51,9 +51,14 @@ def FitnessParent(parent):
     desiredNeuronValues = VectorCreate(10)
     for j in range(1,10,2):
         desiredNeuronValues[j] = 1
-    print "Actual", actualNeuronValues
-    print "Desired", desiredNeuronValues  
-    return neuronValues
+    #print "Actual", actualNeuronValues
+    #print "Desired", desiredNeuronValues 
+    
+    #Compute Mean Distance
+    d = MeanDistance(actualNeuronValues, desiredNeuronValues)
+    f = 1 - d
+    print "Fitness = ", f
+    return f
 
 #The synaptic weights of the parent neural network
 parent = MatrixCreate(numNeurons,numNeurons) 
