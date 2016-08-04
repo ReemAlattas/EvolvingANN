@@ -33,6 +33,10 @@ def MatrixPerturb(p, prob):
                 c[x][y] = random.random()
     return c
     
+def MatrixPlot(neuronValues):
+    plt.pyplot.imshow(neuronValues, cmap=plt.cm.gray, aspect='auto', interpolation='nearest')
+    plt.pyplot.show()
+    
 def Update (neuronValues, synapses, i):
     temp = 0
     sum = 0 
@@ -55,8 +59,7 @@ def FitnessParent(parent):
     #print "Neuron Values", neuronValues
     
     ### PLOT ###
-    plt.pyplot.imshow(neuronValues, cmap=plt.cm.gray, aspect='auto', interpolation='nearest')
-    plt.pyplot.show()
+    MatrixPlot(neuronValues)
     
     actualNeuronValues = neuronValues[9,:]
     desiredNeuronValues = VectorCreate(10)
@@ -78,6 +81,14 @@ parent = MatrixRandomize(parent)
 parentFitness = FitnessParent(parent) 
 
 fitnessVector = VectorCreate(numGenerations)
+
+#neuronValues = MatrixCreate(numUpdates, numNeurons)
+#neuronValues[0] = 0.5
+#for i in range(1, numUpdates):
+#        Update (neuronValues, parent, i)
+#        
+#plt.pyplot.imshow(neuronValues, cmap=plt.cm.gray, aspect='auto', interpolation='nearest')
+#plt.pyplot.show()
 
 for currentGeneration in range(0,numGenerations):
     #print currentGeneration, parentFitness 
